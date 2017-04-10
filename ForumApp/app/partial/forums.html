@@ -1,15 +1,11 @@
-﻿<div ng-controller="categoryController">
-
-    <div class="col-xs-3">
-        <a ng-click="getCategories()" class="btn btn-block btn-default btn-lg" style="margin-top:2%">Home</a>
-        <a ng-repeat="item in categories" ng-click="getCategoryForum(item.CategoryId);selectCategory(item.CategoryId)"
-           class=" btn btn-block btn-default btn-lg">
-            {{item.CategoryName}}
-        </a>
+﻿<div ng-controller="forumController">
+    <div class="col-sm-12" style="margin-top:10px;">
+        <div class="col-sm-2">
+            <a href="#" class="btn btn-info" ng-click="addForum()">Updates <span class="badge">+</span></a>
+        </div>
     </div>
-
-    <div class="col-xs-9">
-        <div class="panel panel-default" ng-repeat="item in forums">
+    <div class="col-xs-9" style="margin-top:2%">
+        <div class="panel panel-default" ng-repeat="item in filteredForums">
             <div class="panel-heading">
                 <strong>{{item.Title}}</strong>
                 <span class="pull-right label label-primary">
@@ -18,7 +14,7 @@
             </div>
             <div class="panel-body">
                 <div class="media">
-                    
+
                     <div class="media-body">
                         <p>{{item.Contents}}</p>
                     </div>
@@ -29,21 +25,19 @@
                 <a ng-click="editForum(item)" class="btn btn-info btn-xs">Edit</a>
             </div>
         </div>
-
-        
-        <!--<div class="pull-right btn-group">
-            <a ng-repeat="page in data.gadgets | filter:categoryFilterFn | filter:searchItem | pageCount:pageSize"
-               ng-click="selectPage($index + 1)" class="btn btn-default" ng-class="getPageClass($index + 1)">
-                {{$index + 1}}
-            </a>
-        </div>-->
+        <pagination ng-model="currentPage"
+                    total-items="forums.length"
+                    max-size="maxSize">
+        </pagination>
     </div>
+
     <div class="col-xs-3">
     </div>
+
     <div ng-show="divForumEdit" class="col-xs-9">
         <div style="margin-top:10px;">
             <div class="panel panel-info">
-                <div class="panel-heading" style="color:#3276B1"><b>Update Forum</b></div>
+                <div class="panel-heading" style="color:#3276B1"><b>{{Action}} Forum</b></div>
                 <div class="panel-body">
                     <table class="table">
                         <tr>
@@ -78,4 +72,5 @@
             </div>
         </div>
     </div>
+
 </div>

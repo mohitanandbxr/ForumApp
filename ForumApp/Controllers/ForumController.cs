@@ -31,12 +31,6 @@ namespace ForumApp.Controllers
             }
         }
 
-        public JsonResult GetForum(int Id)
-        {
-            var forumData = context.Forums.Where(x => x.ForumId == Id).FirstOrDefault();
-            return Json(forumData, JsonRequestBehavior.AllowGet);
-        }
-
         public void EditForum(Forum forum)
         {
             var forumData = context.Forums.Where(x => x.ForumId == forum.ForumId && x.IsActive).FirstOrDefault();
@@ -45,6 +39,11 @@ namespace ForumApp.Controllers
             forumData.CreatedBy = forum.CreatedBy;
             context.Entry(forumData).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public void AddForum(Forum forum)
+        {
+
         }
 
         public void DeleteForum(int Id)

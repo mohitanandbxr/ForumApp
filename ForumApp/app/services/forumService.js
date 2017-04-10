@@ -1,9 +1,6 @@
 ﻿angular.module("forumApp")
-    .factory('categoryService', ['$http', 'categoriesUrl', 'forumsUrl', function ($http, categoriesUrl, forumsUrl) {
+    .factory('forumService', ['$http', function ($http) {
         return {
-            getCategories: function () {
-                return $http.get(categoriesUrl);
-            },
             getForums: function (Id) {
                 return $http.get("http://localhost:50527/Forum/GetForums?Id=" + Id);
             },

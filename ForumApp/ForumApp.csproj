@@ -175,10 +175,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\controllers\categoryController.js" />
+    <Content Include="app\controllers\forumController.js" />
     <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\filters\storeFilters.js" />
     <Content Include="app\forumApp.js" />
     <Content Include="app\partial\categories.html" />
+    <Content Include="app\partial\forums.html" />
     <Content Include="app\services\categoryService.js" />
+    <Content Include="app\services\forumService.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
