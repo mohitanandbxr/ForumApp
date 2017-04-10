@@ -1,0 +1,78 @@
+﻿<div ng-controller="categoryController">
+
+    <div class="col-xs-3">
+        <a ng-click="getCategories()" class="btn btn-block btn-default btn-lg" style="margin-top:2%">Home</a>
+        <a ng-repeat="item in categories" ng-click="getCategoryForum(item.CategoryId)"
+           class=" btn btn-block btn-default btn-lg">
+            {{item.CategoryName}}
+        </a>
+    </div>
+
+    <div class="col-xs-9">
+        <div class="panel panel-default" ng-repeat="item in forums">
+            <div class="panel-heading">
+                <strong>{{item.Title}}</strong>
+                <span class="pull-right label label-primary">
+                    Created By: {{item.CreatedBy}}
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <!--<a class="pull-left" href="#">
+                        <img class="media-object" ng-src="../../images/{{item.Image}}" />
+                    </a>-->
+                    <div class="media-body">
+                        <span class="lead">{{item.Contents}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a ng-click="deleteForum(item.ForumId)" class="btn btn-danger">Archive</a>
+                <a ng-click="editForum(item)" class="btn btn-info">Edit</a>
+            </div>
+        </div>
+        <!--<div class="pull-right btn-group">
+            <a ng-repeat="page in data.gadgets | filter:categoryFilterFn | filter:searchItem | pageCount:pageSize"
+               ng-click="selectPage($index + 1)" class="btn btn-default" ng-class="getPageClass($index + 1)">
+                {{$index + 1}}
+            </a>
+        </div>-->
+    </div>
+</div>
+
+<div ng-show="divForum" style="margin-top:10px;">
+    <div class="panel panel-info">
+        <div class="panel-heading" style="color:#3276B1"><b>Update Forum</b></div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td><b>Forum Id</b></td>
+                    <td>
+                        <input type="text" disabled="disabled" class="form-control" ng-model="forumId" />
+                    </td>
+                    <td><b>Title</b></td>
+                    <td>
+                        <input type="text" ng-model="forumTitle" class="form-control" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Contents</b></td>
+                    <td>
+                        <input type="text" ng-model="forumContents" class="form-control" required />
+                    </td>
+                    <td><b>Created By</b></td>
+                    <td>
+                        <input type="text" ng-model="forumCreatedBy" class="form-control" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="button" class="btn" value="Save" ng-click="UpdateForum()" style="background:#4BC0C0;color:white" />
+                        <input type="button" class="btn btn-danger" value="Cancel" ng-click="Cancel()" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
