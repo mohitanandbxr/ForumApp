@@ -43,7 +43,9 @@ namespace ForumApp.Controllers
 
         public void AddForum(Forum forum)
         {
-
+            forum.IsActive = true;
+            context.Forums.Add(forum);
+            context.SaveChanges();
         }
 
         public void DeleteForum(int Id)

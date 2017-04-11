@@ -1,5 +1,5 @@
 ﻿angular.module("forumApp")
-.controller("forumController", ['$scope','forumService', function ($scope, forumService) {
+.controller("forumController", ['$scope','forumService','categoryService', function ($scope, forumService, categoryService) {
     
     forumService.getForums()
     .then(function (data) {
@@ -36,7 +36,6 @@
         $scope.forumTitle = forum.Title;
         $scope.forumContents = forum.Contents;
         $scope.forumCreatedBy = forum.CreatedBy;
-        $scope.Action = "Edit";
     };
 
     $scope.editForumData = function () {
@@ -56,12 +55,37 @@
         })
     };
 
-
     $scope.cancel = function () {
         $scope.forumId = "";
         $scope.forumTitle = "";
         $scope.forumContents = "";
         $scope.forumCreatedBy = "";
         $scope.divForumEdit = false;
+        $scope.divForumAdd = false;
+    }
+
+    $scope.addForum = function () {
+        categoryService.getCategories()
+        .then(function (data) {
+            $scope.categories = data.data;
+            $scope.divForumAdd = true;
+        })
+    }
+
+    $scope.addForumData = function () {
+        var Forum = {
+            Title: $scope.forumTitle,
+            Contents: $scope.forumContents,
+            CategoryId: $scope.selectedCategory,
+            CreatedBy : $scope.forumCreatedBy
+        }
+        $scope.divForumAdd = false;
+        forumService.addForum(Forum)
+        .then(function () {
+            forumService.getForums()
+            .then(function (data) {
+                $scope.forums = data.data;
+            })
+        })
     }
 }])

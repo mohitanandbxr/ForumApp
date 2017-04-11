@@ -15,6 +15,15 @@
                     dataType: "json"
                 });
                 return response;
+            },
+            addForum: function (forum) {
+                var response = $http({
+                    method: "post",
+                    url: "/Forum/AddForum",
+                    data: JSON.stringify(forum),
+                    dataType: "json"
+                });
+                return response;
             }
         }
     }]);

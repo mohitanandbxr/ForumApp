@@ -2,7 +2,7 @@
     .constant('categoriesUrl', 'http://localhost:50527/Category/GetCategories')
     .constant('forumsUrl', 'http://localhost:50527/Forum/GetForums')
 
-    .controller('categoryController', ['$scope','categoryService', function ($scope,categoryService) {
+    .controller('categoryController', ['$scope','categoryService','forumService', function ($scope,categoryService, forumService) {
 
         var selectedCategory = null;
         $scope.selectCategory = function (newCategory) {
@@ -18,17 +18,18 @@
                     $scope.error = error;
                 });
 
-        categoryService.getForums()
-                .then(function (data) {
-                    $scope.forums = data.data;
-                })
-                .catch(function (error) {
-                    $scope.error = error;
-                });
+        //forumService.getForums()
+        //        .then(function (data) {
+        //            $scope.forums = data.data;
+        //        })
+        //        .catch(function (error) {
+        //            $scope.error = error;
+        //        });
 
         $scope.getCategoryForum = function (Id) {
             $scope.divForumEdit = false;
-            categoryService.getForums(Id)
+            $scope.divCategoryAdd = false;
+            forumService.getForums(Id)
             .then(function (data) {
                 $scope.forums = data.data;
             })
@@ -38,9 +39,9 @@
         }
 
         $scope.deleteForum = function (Id) {
-            categoryService.deleteForum(Id)
+            forumService.deleteForum(Id)
             .then(function (data) {
-                categoryService.getForums()
+                forumService.getForums()
                 .then(function (data) {
                     $scope.forums = data.data;
                 })
@@ -51,6 +52,7 @@
         }
 
         $scope.editForum = function (forum) {
+            $scope.divCategoryAdd = false;
             $scope.divForumEdit = true;
             $scope.forumId = forum.ForumId;
             $scope.forumTitle = forum.Title;
@@ -66,23 +68,47 @@
                 CreatedBy: $scope.forumCreatedBy
             };
             $scope.divForumEdit = false;
-            categoryService.updateForum(Forum)
+            forumService.updateForum(Forum)
             .then(function () {
                 if (selectedCategory != null) {
-                    categoryService.getForums(selectedCategory)
+                    forumService.getForums(selectedCategory)
+                    .then(function (data) {
+                        $scope.forums = data.data;
+                    })
+                }
+                else {
+                    forumService.getForums()
                     .then(function (data) {
                         $scope.forums = data.data;
                     })
                 }
             })
         }
-                
-
+             
         $scope.cancel = function () {
             $scope.forumId = "";
             $scope.forumTitle = "";
             $scope.forumContents = "";
             $scope.forumCreatedBy = "";
             $scope.divForumEdit = false;
+            $scope.divCategoryAdd = false;
+        }
+
+        $scope.addCategory = function () {
+            $scope.divCategoryAdd = true;
+        }
+
+        $scope.addCategoryData = function () {
+            var Category = {
+                CategoryName : $scope.categoryName
+            }
+            $scope.divCategoryAdd = false;
+            categoryService.addCategory(Category)
+            .then(function () {
+                categoryService.getCategories()
+                .then(function(data){
+                    $scope.categories = data.data;
+                })
+            })
         }
     }]);

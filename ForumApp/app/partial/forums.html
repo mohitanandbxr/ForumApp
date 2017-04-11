@@ -1,7 +1,7 @@
 ﻿<div ng-controller="forumController">
     <div class="col-sm-12" style="margin-top:10px;">
         <div class="col-sm-2">
-            <a href="#" class="btn btn-info" ng-click="addForum()">Updates <span class="badge">+</span></a>
+            <a href="#" class="btn btn-info" ng-click="addForum()">Add Forum <span class="badge">+</span></a>
         </div>
     </div>
     <div class="col-xs-9" style="margin-top:2%">
@@ -35,42 +35,86 @@
     </div>
 
     <div ng-show="divForumEdit" class="col-xs-9">
-        <div style="margin-top:10px;">
-            <div class="panel panel-info">
-                <div class="panel-heading" style="color:#3276B1"><b>{{Action}} Forum</b></div>
-                <div class="panel-body">
-                    <table class="table">
-                        <tr>
-                            <td><b>Forum Id</b></td>
-                            <td>
-                                <input type="text" disabled="disabled" class="form-control" ng-model="forumId" />
-                            </td>
-                            <td><b>Title</b></td>
-                            <td>
-                                <input type="text" ng-model="forumTitle" class="form-control" required />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Contents</b></td>
-                            <td>
-                                <input type="text" ng-model="forumContents" class="form-control" required />
-                            </td>
-                            <td><b>Created By</b></td>
-                            <td>
-                                <input type="text" ng-model="forumCreatedBy" class="form-control" required />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input type="button" class="btn btn-xs" value="Save" ng-click="editForumData()" style="background:#4BC0C0;color:white" />
-                                <input type="button" class="btn btn-danger btn-xs" value="Cancel" ng-click="cancel()" />
-                            </td>
-                        </tr>
-                    </table>
+        <form name="ngForm" ng-submit="editForumData()">
+            <div style="margin-top:10px;">
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="color:#3276B1"><b>Edit Forum</b></div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td><b>Forum Id</b></td>
+                                <td>
+                                    <input type="text" disabled="disabled" class="form-control" ng-model="forumId" />
+                                </td>
+                                <td><b>Title</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumTitle" class="form-control" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Contents</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumContents" class="form-control" required />
+                                </td>
+                                <td><b>Created By</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumCreatedBy" class="form-control" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" class="btn btn-xs" value="Save" style="background:#4BC0C0;color:white" />
+                                    <input type="button" class="btn btn-danger btn-xs" value="Cancel" ng-click="cancel()" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
+    <div ng-show="divForumAdd" class="col-xs-9">
+        <form name="ngForm" ng-submit="addForumData()">
+            <div style="margin-top:10px;">
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="color:#3276B1"><b>Add Forum</b></div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td><b>Select Category</b></td>
+                                <td>
+                                    <select name="repeatSelect" id="repeatSelect" ng-model="selectedCategory">
+                                        <option ng-repeat="option in categories" value="{{option.CategoryId}}">{{option.CategoryName}}</option>
+                                    </select>
+                                </td>
+                                <td><b>Forum Title</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumTitle" class="form-control" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Contents</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumContents" class="form-control" required />
+                                </td>
+                                <td><b>Created By</b></td>
+                                <td>
+                                    <input type="text" ng-model="forumCreatedBy" class="form-control" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="submit" class="btn btn-xs" value="Save" style="background:#4BC0C0;color:white" />
+                                    <input type="button" class="btn btn-danger btn-xs" value="Cancel" ng-click="cancel()" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

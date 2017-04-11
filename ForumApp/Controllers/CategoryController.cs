@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mail;
 using System.Web.Mvc;
 
 namespace ForumApp.Controllers
@@ -26,6 +27,13 @@ namespace ForumApp.Controllers
         {
             var catefory = context.Categories.Where(x => x.CategoryId == Id).FirstOrDefault();
             return Json(catefory, JsonRequestBehavior.AllowGet);
+        }
+
+        public void AddCategory(Category category) 
+        {
+            category.IsActive = true;
+            context.Categories.Add(category);
+            context.SaveChanges();
         }
 
         public void EditCategory(Category category)

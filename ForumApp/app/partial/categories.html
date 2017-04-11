@@ -1,11 +1,40 @@
 ﻿<div ng-controller="categoryController">
 
     <div class="col-xs-3">
-        <a ng-click="getCategories()" class="btn btn-block btn-default btn-lg" style="margin-top:2%">Home</a>
+        <!--<a ng-click="getCategories()" class="btn btn-block btn-default btn-lg" style="margin-top:2%">Home</a>-->
         <a ng-repeat="item in categories" ng-click="getCategoryForum(item.CategoryId);selectCategory(item.CategoryId)"
            class=" btn btn-block btn-default btn-lg">
             {{item.CategoryName}}
         </a>
+        <a href="#" class="btn btn-info" ng-click="addCategory()" style="margin-top:10px;width:100%">Add Category <span class="badge">+</span></a>
+        <div ng-show="divCategoryAdd" style="width:100%">
+            <form name="ngForm" ng-submit="addCategoryData()">
+                <div style="margin-top:10px;">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="color:#3276B1"><b>Add Category</b></div>
+                        <div class="panel-body">
+                            <table class="table">
+                                
+                                <tr>
+                                    <td><b>Category Name</b></td>
+                                    <td>
+                                        <input type="text" ng-model="categoryName" class="form-control" required />
+                                    </td>  
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <input type="submit" class="btn btn-xs" value="Save" style="background:#4BC0C0;color:white" />
+                                        <input type="button" class="btn btn-danger btn-xs" value="Cancel" ng-click="cancel()" />
+                                    </td>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="col-xs-9">

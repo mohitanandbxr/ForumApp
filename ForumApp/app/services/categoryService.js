@@ -4,17 +4,11 @@
             getCategories: function () {
                 return $http.get(categoriesUrl);
             },
-            getForums: function (Id) {
-                return $http.get("http://localhost:50527/Forum/GetForums?Id=" + Id);
-            },
-            deleteForum: function (Id) {
-                return $http.get("http://localhost:50527/Forum/DeleteForum?Id=" + Id);
-            },
-            updateForum: function (forum) {
+            addCategory: function (category) {
                 var response = $http({
                     method: "post",
-                    url: "/Forum/EditForum",
-                    data: JSON.stringify(forum),
+                    url: "/Category/AddCategory",
+                    data: JSON.stringify(category),
                     dataType: "json"
                 });
                 return response;
