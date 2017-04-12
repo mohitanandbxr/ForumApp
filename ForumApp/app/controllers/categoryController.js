@@ -99,14 +99,48 @@
         }
 
         $scope.addCategoryData = function () {
-            var Category = {
-                CategoryName : $scope.categoryName
+            if ($scope.categoryId != null) {
+                var category = {
+                    CategoryId: $scope.categoryId,
+                    CategoryName : $scope.categoryName
+                }
+                $scope.divCategoryAdd = false;
+                categoryService.editCategory(category)
+                .then(function () {
+                    categoryService.getCategories()
+                    .then(function (data) {
+                        $scope.categories = data.data;
+                    })
+                })
+                $scope.categoryName = "";
             }
+            else {
+                var Category = {
+                    CategoryName: $scope.categoryName
+                }
+                $scope.divCategoryAdd = false;
+                categoryService.addCategory(Category)
+                .then(function () {
+                    categoryService.getCategories()
+                    .then(function (data) {
+                        $scope.categories = data.data;
+                    })
+                })
+            } 
+        }
+
+        $scope.editCategory = function (categoryName, categoryId) {
+            $scope.categoryName = categoryName;
+            $scope.categoryId = categoryId;
+            $scope.divCategoryAdd = true;
+        }
+
+        $scope.deleteCategory = function (Id) {
             $scope.divCategoryAdd = false;
-            categoryService.addCategory(Category)
+            categoryService.deleteCategory(Id)
             .then(function () {
                 categoryService.getCategories()
-                .then(function(data){
+                .then(function (data) {
                     $scope.categories = data.data;
                 })
             })

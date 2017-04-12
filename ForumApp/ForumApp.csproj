@@ -125,7 +125,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\directives\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Category\" />
@@ -177,6 +176,7 @@
     <Content Include="app\controllers\categoryController.js" />
     <Content Include="app\controllers\forumController.js" />
     <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\directives\labelDirective.js" />
     <Content Include="app\filters\storeFilters.js" />
     <Content Include="app\forumApp.js" />
     <Content Include="app\partial\categories.html" />

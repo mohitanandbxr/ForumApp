@@ -8,9 +8,7 @@
         <div class="panel panel-default" ng-repeat="item in filteredForums">
             <div class="panel-heading">
                 <strong>{{item.Title}}</strong>
-                <span class="pull-right label label-primary">
-                    Created By: {{item.CreatedBy}}
-                </span>
+                <author-Detail></author-Detail>
             </div>
             <div class="panel-body">
                 <div class="media">

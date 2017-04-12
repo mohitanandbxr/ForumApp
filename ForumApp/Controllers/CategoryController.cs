@@ -23,10 +23,10 @@ namespace ForumApp.Controllers
             var categories = context.Categories.Where(x => x.IsActive);
             return Json(categories, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetCategory(int Id)
+        public JsonResult GetCategory(int Id)
         {
-            var catefory = context.Categories.Where(x => x.CategoryId == Id).FirstOrDefault();
-            return Json(catefory, JsonRequestBehavior.AllowGet);
+            var category = context.Categories.Where(x => x.CategoryId == Id).FirstOrDefault();
+            return Json(category, JsonRequestBehavior.AllowGet);
         }
 
         public void AddCategory(Category category) 
@@ -40,6 +40,7 @@ namespace ForumApp.Controllers
         {
             var categoryData = context.Categories.Where(x => x.CategoryId == category.CategoryId && x.IsActive).FirstOrDefault();
             categoryData.CategoryName = category.CategoryName;
+            categoryData.IsActive = true;
             context.Entry(categoryData).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
         }
@@ -54,6 +55,10 @@ namespace ForumApp.Controllers
 
         public ActionResult Index()
         {
+            var forumInfo = from a in context.Forums
+                            join b in context.Categories
+                            on a.CategoryId equals b.CategoryId
+                            select new { Title = a.Title, MyCategory = b.CategoryName };
             return View();
         }
     }

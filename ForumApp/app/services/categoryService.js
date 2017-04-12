@@ -12,6 +12,22 @@
                     dataType: "json"
                 });
                 return response;
+            },
+            editCategory: function (category) {
+                var response = $http({
+                    method: "post",
+                    url: "/Category/EditCategory",
+                    data: JSON.stringify(category),
+                    dataType: "json"
+                });
+                return response;
+            },
+            deleteCategory: function (Id) {
+                var response = $http({
+                    method: "post",
+                    url: "/Category/DeleteCategory?CategoryId="+Id
+                });
+                return response;
             }
         }
     }]);

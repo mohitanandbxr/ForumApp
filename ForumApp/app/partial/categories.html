@@ -1,11 +1,12 @@
 ﻿<div ng-controller="categoryController">
 
     <div class="col-xs-3">
-        <!--<a ng-click="getCategories()" class="btn btn-block btn-default btn-lg" style="margin-top:2%">Home</a>-->
-        <a ng-repeat="item in categories" ng-click="getCategoryForum(item.CategoryId);selectCategory(item.CategoryId)"
-           class=" btn btn-block btn-default btn-lg">
-            {{item.CategoryName}}
-        </a>
+        <table class="table">
+            <tr ng-repeat="item in categories">
+                <td style="width:80%"><button type="button" class="btn btn-block btn-info btn-lg" ng-click="getCategoryForum(item.CategoryId);selectCategory(item.CategoryId)">{{item.CategoryName}}</button></td>
+                <td><button class="btn btn-info btn-xs" style="margin-top:10px;" ng-click="editCategory(item.CategoryName,item.CategoryId)">Edit</button></td>
+                <td><button class="btn btn-danger btn-xs" style="margin-top:10px" ng-click="deleteCategory(item.CategoryId)">Delete</button></td>
+        </table>
         <a href="#" class="btn btn-info" ng-click="addCategory()" style="margin-top:10px;width:100%">Add Category <span class="badge">+</span></a>
         <div ng-show="divCategoryAdd" style="width:100%">
             <form name="ngForm" ng-submit="addCategoryData()">
@@ -14,12 +15,12 @@
                         <div class="panel-heading" style="color:#3276B1"><b>Add Category</b></div>
                         <div class="panel-body">
                             <table class="table">
-                                
+
                                 <tr>
                                     <td><b>Category Name</b></td>
                                     <td>
                                         <input type="text" ng-model="categoryName" class="form-control" required />
-                                    </td>  
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -27,7 +28,7 @@
                                         <input type="submit" class="btn btn-xs" value="Save" style="background:#4BC0C0;color:white" />
                                         <input type="button" class="btn btn-danger btn-xs" value="Cancel" ng-click="cancel()" />
                                     </td>
-                                    
+
                                 </tr>
                             </table>
                         </div>
@@ -47,7 +48,7 @@
             </div>
             <div class="panel-body">
                 <div class="media">
-                    
+
                     <div class="media-body">
                         <p>{{item.Contents}}</p>
                     </div>
@@ -59,13 +60,6 @@
             </div>
         </div>
 
-        
-        <!--<div class="pull-right btn-group">
-            <a ng-repeat="page in data.gadgets | filter:categoryFilterFn | filter:searchItem | pageCount:pageSize"
-               ng-click="selectPage($index + 1)" class="btn btn-default" ng-class="getPageClass($index + 1)">
-                {{$index + 1}}
-            </a>
-        </div>-->
     </div>
     <div class="col-xs-3">
     </div>
